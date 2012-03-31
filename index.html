@@ -2,16 +2,114 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>Kalyan G</title>
+<title>JS Bin</title>
 <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <style>
   article, aside, figure, footer, header, hgroup, 
-  menu, nav, section { display: block; }
+  menu,  section { display: block; }
+  body{
+    font-family:"Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,sans-serif;
+  }
+  #body{
+    width:60%;
+    text-align:default;
+    border:1px solid black;
+    margin:auto;
+  }
+  #nav { list-style-type:none;  }
+  #nav li{ 
+    width:20%;
+    float:left;    
+    margin:5%;
+  }
+  a{    
+    color:#9DCEE6;   
+    text-decoration:none;  
+  }
+  a:hover{
+    text-decoration:underline;    
+  }
+  a:visited{
+    text-decoration:underline;    
+  }
+  #content{
+    clear:left;
+  }
+  footer,footer a{
+    font-size:0.75em;
+    color:#888888;
+  }
+  footer a{ border-bottom:1px dotted #888888; }
 </style>
 </head>
 <body>
-  <p id="hello">Hello, This is Kalyan Gss</p>
+<div id="body">
+  <header>
+    <div id="header">
+      <nav>
+      <ul id='nav'>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#links">Links</a></li>
+      <!--<li><a href="#about">About</a></li>-->
+      </ul>
+      </nav>
+    </div>
+  </header>
+  <div id="content">
+    <div id="home">
+      <h1>About me</h1>
+    <p>I am Kalyan, I am a developer from hyderabad.</p>    
+      <p>I use this place to keep list of things that I find intresting</p>  
+    </div>
+    <div id="books">
+      <h2>Books I like</h2>
+      <ul>
+        <li>7 Habits of highly effective people By Stephen Covey</li>
+        <li>How to win friends &amp; influence people By Dale carnegie</li>
+        <li>Tranforming India by Atanu dey</li>
+        <li>High performance enterprenuer by Subrato Bagchi</li>
+      </ul>
+    </div>
+    <div id="links">
+      <h2>Web sites I visit</h2>
+      <ul>
+        <li><a href="http://paulgraham.com/"> Paul Graham's essay's </a></li>
+        <li><a href="http://www.deeshaa.org/"> Atanau dey on India</a></li>   
+      </ul>
+    </div>
+    <!--<div id="about">
+       <p>I am Kalyan, I am a developer from hyderabad. </p>
+    
+We build web solutions that build your business! Our services include:
+
+Websites to strengthen your web presence
+Website design, Web Apps, E-Commerce Portals, CMS, User Interfaces, Rich and Dynamic websites.
+
+Solutions to Manage your Business Effectively
+Social office and Intranets, Custom ERP Applications, CRMs, HRMs and a lot more...
+
+We are experts at OpenSource Consulting and the technologies, mainly
+PHP (CodeIgniter) & MySQL, Ajax, jQuery, XHTML, CSS.
+
+
+
+I'm Kalyan, a developer & student of the web. 
+
+I'm into the front-end, back-end and all ends in between. A full stack hacker.
+
+On Twitter I'm @phuunet, and you can also find me on Github.
+
+I love to talk, so email me and say hi!
+  </div>-->
+    <footer>
+      no rights reserved. 
+      <p style="display:none;"><a rel="license" href="http://creativecommons.org/licenses/by-sa/2.5/in/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.5/in/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/2.5/in/">Creative Commons Attribution-ShareAlike 2.5 India License</a>.</p>
+    </footer>
+</div>
+ 
+  </div>
 </body>
 </html>
