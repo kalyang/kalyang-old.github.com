@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>JS Bin</title>
+<title>Personal website of kalyan</title>
 <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -14,29 +14,23 @@
   }
   #body{
     width:60%;
-    text-align:default;
-    border:1px solid black;
+    text-align:default;    
     margin:auto;
   }
-  #nav { list-style-type:none;  }
-  #nav li{ 
-    width:20%;
-    float:left;    
-    margin:5%;
+  #nav { 
+      list-style-type:none; 
+      margin:0;
+      padding:0;
+      font-size:1.6em;
+      display:none;
   }
-  a{    
-    color:#9DCEE6;   
-    text-decoration:none;  
-  }
-  a:hover{
-    text-decoration:underline;    
-  }
-  a:visited{
-    text-decoration:underline;    
-  }
-  #content{
-    clear:left;
-  }
+  #nav li{     
+    display:inline;    
+    margin:1%;    
+  }  
+  a{ text-decoration:underline; }
+  a:hover, a:visited{ text-decoration:none;  }
+  #content{clear:left;  }
   footer,footer a{
     font-size:0.75em;
     color:#888888;
@@ -60,12 +54,14 @@
   </header>
   <div id="content">
     <div id="home">
-      <h1>About me</h1>
-    <p>I am Kalyan, I am a developer from hyderabad.</p>    
-      <p>I use this place to keep list of things that I find intresting</p>  
+      <h1>Kalyan's personal website</h1>
+    <p>I am Kalyan, I am a developer from hyderabad, India.</p>    
+      <p>I spend a lot of time on internet and I use this place to take notes or make list of things that I find intresting.</p> 
+      <p>I am usually active on <a href="http://twitter.com/kalyanganjam">twitter</a> than here.</p>
     </div>
     <div id="books">
-      <h2>Books I like</h2>
+      <h2>Books</h2>
+      <p>These are the books I have read in the past and found immensely helpful.</p>
       <ul>
         <li>7 Habits of highly effective people By Stephen Covey</li>
         <li>How to win friends &amp; influence people By Dale carnegie</li>
@@ -74,7 +70,8 @@
       </ul>
     </div>
     <div id="links">
-      <h2>Web sites I visit</h2>
+      <h2>People</h2>
+      <p>These are the sites run by peole who I respect and have omething to say.</p>
       <ul>
         <li><a href="http://paulgraham.com/"> Paul Graham's essay's </a></li>
         <li><a href="http://www.deeshaa.org/"> Atanau dey on India</a></li>   
