@@ -6,36 +6,42 @@
 <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<link media="all" href="stylesheet.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.js"></script>
 <script type="text/javascript">
-
-    google.load("feeds", "1");
-
+ google.load("feeds", "1");
+    var curr_item = ''
     function initialize() {
-      var feed = new google.feeds.Feed("http://hackerstreet.in/rss");
-      feed.load(function(result) {
-        if (!result.error) {
-          var container = document.getElementById("body");
-          for (var i = 0; i < result.feed.entries.length; i++) {
-            var entry = result.feed.entries[i];
-            var div = document.createElement("a");
-            div.class = 'feed';
-            a.href = ('http://viewtext.org/article?url='+escape(entry.link);
-            div.appendChild(document.createTextNode(entry.title));
-            container.appendChild(div);
-          }
+        var feed = new google.feeds.Feed("http://hackerstreet.in/rss");
+        feed..setNumEntries(10)
+        feed.load(
+        function (result) {
+            $.each(result.feed.entries, function (index, entry) { $('ul').append(('<li><a class="article" id="link-' + index + '" href="' + entry.link + '">' + entry.title + '</a><div class="article" id="article-link-' + index + '"></div></li>')) });
+            $('ul a.article').click(function (event) {
+                event.preventDefault();
+                curr_item = "#article-" + $(this).attr('id');
+                $.getJSON("http://viewtext.org/api/text?url=" + ($(this).attr('href')) + "&callback=?",
+                function (data) {
+                    $('#feeds div.article:visible').slideUp();
+                    $(curr_item).html(data.content);
+                    $(curr_item).slideDown();
+                    curr_item = '';
+                });
+            });
         }
-      });
+        );
     }
-    google.setOnLoadCallback(initialize);
-
-    </script>
+google.setOnLoadCallback(initialize);
+</script>
 <style>
-a.feed { display:block;}
+    #feeds{background-color:#f6f6ef;color:#828282;width:90%;}
+    #feeds div.article{ display:none;}
+    #feeds li a{padding:5px;text-decoration: none; font-size:1.2em; line-height:1.5em;}
+    #feeds li a:link {color: #000000;}
+    #feeds li a:visited {color: #828282;}
 </style>
 </head>
 <body>
-<div id="body">
-</div>
+<ul id="feeds">
+</ul>
 </body>
