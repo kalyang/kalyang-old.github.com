@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>Personal website of kalyan</title>
+<title>Hacker street mobile friendly view</title>
 <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -13,7 +13,7 @@
     var curr_item = ''
     function initialize() {
         var feed = new google.feeds.Feed("http://hackerstreet.in/rss");
-        feed..setNumEntries(10)
+        feed.setNumEntries(10)
         feed.load(
         function (result) {
             $.each(result.feed.entries, function (index, entry) { $('ul').append(('<li><a class="article" id="link-' + index + '" href="' + entry.link + '">' + entry.title + '</a><div class="article" id="article-link-' + index + '"></div></li>')) });
