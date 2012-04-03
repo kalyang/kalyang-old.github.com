@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Hacker street mobile friendly view</title>
 <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -14,7 +14,7 @@
     var curr_item = ''
     function initialize() {
         var feed = new google.feeds.Feed("http://hackerstreet.in/rss");
-        feed.setNumEntries(10)
+        feed.setNumEntries(40)
         feed.load(
         function (result) {
             $.each(result.feed.entries, function (index, entry) { $('ul').append(('<li><a class="article" id="link-' + index + '" href="' + entry.link + '">' + entry.title + '</a><div class="article" id="article-link-' + index + '"></div></li>')) });
@@ -35,8 +35,10 @@
 google.setOnLoadCallback(initialize);
 </script>
 <style>
-    #feeds{background-color:#f6f6ef;width:90%;list-style-type:none;}
-    #feeds div.article{ display:none;border:1px solid #828282;}
+    #feeds{background-color:#f6f6ef;
+    width:100%;list-style-type:none;padding:0; margin:0;}
+    #feeds div.article{ display:none;border:1px solid #828282;border-radius:5px;}
+    #feeds li {border-bottom:1px solid #828282; }
     #feeds li a{padding:5px;text-decoration: none; font-size:1.2em; line-height:1.5em;}
     #feeds li a:link {color: #000000;}
     #feeds li a:visited {color: #828282;}
