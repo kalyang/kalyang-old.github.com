@@ -68,4 +68,4 @@ var FireBlade = {
     }
 }
 
-$(document).ready(FireBlade.OnStart());
+
