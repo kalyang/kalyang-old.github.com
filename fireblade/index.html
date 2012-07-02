@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>My jqplot test</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="jqplot/jquery.jqplot.min.js" type="text/javascript"></script>
+    <script src="plugins/jqplot.DateAxisRenderer.min.js" type="text/javascript"></script>
+    <script src="plugins/jqplot.highlighter.min.js" type="text/javascript"></script>    
+    <script src="plugins/jqplot.cursor.min.js" type="text/javascript"></script>
+    <link href="jqplot/jquery.jqplot.min.css" rel="stylesheet" type="text/css" ></link>
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="jqplot/excanvas.js"></script><![endif]-->
+    
+</head>
+<body>
+<h1>jq plot </h1>
+
+<div id="testchart" style="width:700px; height:300px; border:1px solid black;">
+</div>
+<span style="background-color:#4bb2c5;" >Series A</span>
+<input type="checkbox" data="0" id="Series_A" /><br />
+<span style="background-color:#EAA228;">Series B</span>
+<input type="checkbox" data="1" id="series_B"/><br />
+<span style="background-color:#c5b47f;" >Series C</span>
+<input type="checkbox" data="2" id="series_C"/><br />
+<input type="button" onclick="FireBlade.HighLight();"  value="Fade selected"/>
+
+    <script src="chartjs.js" type="text/javascript"></script>
+</body>
+</html>
