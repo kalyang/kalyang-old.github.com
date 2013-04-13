@@ -2,14 +2,8 @@
 article, aside, figure, footer, header, hgroup, 
   menu,  section { display: block; }
   body{
-    /*font-family:"Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,sans-serif;*/
     font-family: 'Ubuntu', sans-serif;
     background: #b4b4b4 repeat scroll 0 0 transparent;
-    background: linear-gradient(left center, #787878 0%, #969696 25%, #b4b4b4 50% , #969696 75%, #787878 100%) repeat scroll 0 0 transparent;
-    background: -o-linear-gradient(left center, #787878 0%, #969696 25%, #b4b4b4 50% , #969696 75%, #787878 100%) repeat scroll 0 0 transparent;
-    background: -moz-linear-gradient(left center, #787878 0%, #969696 25%, #b4b4b4 50% , #969696 75%, #787878 100%) repeat scroll 0 0 transparent;
-    background: -webkit-linear-gradient(left center, #787878 0%, #969696 25%, #b4b4b4 50% , #969696 75%, #787878 100%) repeat scroll 0 0 transparent;
-    background: -ms-linear-gradient(left center, #787878 0%, #969696 25%, #b4b4b4 50% , #969696 75%, #787878 100%) repeat scroll 0 0 transparent;
   }
   #body{
     width:98%;
