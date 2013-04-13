@@ -27,42 +27,61 @@
     display:block;
     }
     #right{
-        width:600px
+        width:600px;
         float:left;
     }
-   
+   #chart{
+    border:1px solid gray;
+   }
+   #chart div.legend, #chart canvas{ float:left;border:0px solid gray;}
+   #chart ul.legend { list-style-type:none; }
+   #chart ul.legend li{ margin:5px;}
     </style>
     <script type="text/javascript">
         var colors = ['#FF6600', '#FF00FF', '#CCCC66', '#00FF00', '#30E478', '#E4DE30', '#30D5E4', '#66656E'
         , '#CCCC66', '#00FF00', '#30E478', '#E4DE30', '#00FF00', '#30E478', '#E4DE30', '#30D5E4'
         ];
-        var dataClock = function (canvasId) {
+
+        var dataClock = function (chartParams) {
             var utils = {
                 radians: function (deg) { return (deg - 90) * Math.PI / 180 },
                 pointX: function (hour) {
-                    return (Math.sin(utils.radians(hour * 15)) * circle.center) + circle.center;
+                    return (Math.sin(utils.radians(hour * 15)) * circle.width) + circle.center;
+                    //return (Math.sin(utils.radians(hour * 15)) * circle.center) + circle.center;
                 },
                 pointY: function (hour) {
-                    return (Math.cos(utils.radians(hour * 15)) * circle.center) + circle.center;
+                    return (Math.cos(utils.radians(hour * 15)) * circle.width) + circle.center;
+                    //return (Math.cos(utils.radians(hour * 15)) * circle.center) + circle.center;
+                },
+                createElement: function (elemType, attrList) {
+                    var elem = document.createElement(elemType);
+                    for (var i in attrList)
+                        elem.setAttribute(i, attrList[i]);
+                    return elem;
                 }
             };
             var _self = this;
-            var paper = document.getElementById(canvasId);
+
+            var paper = utils.createElement('canvas', { id: chartParams.id + '_canvas', width: chartParams.chartsize, height: chartParams.chartsize });
+            var legend = utils.createElement('div', { id: chartParams.id + '_legend', class: 'legend', style: 'width:' + chartParams.legendSize });
+            var daysDiv = utils.createElement('div', { id: chartParams.id + '_days', class: 'days', style: 'position:relative; top 0px; left:0px; width:' + (chartParams.chartsize / 2) + 'px;height: auto;' });
+            document.getElementById(chartParams.id).appendChild(paper);
+            document.getElementById(chartParams.id).appendChild(legend);
             var pen = paper.getContext("2d");
             pen.fillStyle = pen.strokeStyle = 'black';
             pen.DrawArc = function (center, radius, startAngle, endAngle) {
-                if (!endAngle) endAngle = startAngle + 15;
+                if (startAngle == undefined) { startAngle = 0; endAngle = 360; }
+                else if (endAngle == undefined) endAngle = startAngle + 15;
                 pen.beginPath();
                 pen.arc(center, center, radius, utils.radians(startAngle), utils.radians(endAngle));
                 pen.stroke();
             }
             pen.lineWidth = 0.5;
-            var circle = { center: paper.width / 2, unitRadius: paper.width / 16 };
+            var circle = { center: paper.width / 2, unitRadius: paper.width / 18 };
+            circle.width = circle.center - circle.unitRadius;
             _self.plotData = function (data) {
                 //Draw Lines
                 for (var i = 0; i < 24; i++) {
-                    if (i > 0 && i < 9)// Draw 8 circles t repesent 7 doughnuts
-                        pen.DrawArc(circle.center, circle.unitRadius * i, 0, 360);
                     pen.beginPath();
                     pen.moveTo(circle.center, circle.center);
                     pen.lineTo(utils.pointX(i), utils.pointY(i));
@@ -71,32 +90,79 @@
                 //Draw data 
                 pen.lineWidth = circle.unitRadius;
                 for (var i = 0; i < data.length; i++) {
-                    for (var j = 0; j < data[i].length; j++) {
-                        pen.fillStyle = pen.strokeStyle = colors[j];
-                        pen.DrawArc(circle.center, circle.unitRadius * (i + 1.5), parseInt(data[i][j] * 15));
+                    for (var j in data[i]) {
+                        pen.fillStyle = pen.strokeStyle = chartParams.legend[data[i][j]].color;
+                        pen.DrawArc(circle.center, circle.unitRadius * (i + 1.5), parseInt(j * 15));
                     }
                 }
-                pen.fillStyle = pen.strokeStyle = '#ffffff';
+                //Create legend      
+                var legendLst = utils.createElement('ul', { class: 'legend' });
+                legend.appendChild(legendLst);
+                for (var j in chartParams.legend) {
+                    var listItem = utils.createElement("li", { style: "background-color:" + chartParams.legend[j]['color'] + ";" });
+                    listItem.innerText = chartParams.legend[j]['text'];
+                    legendLst.appendChild(listItem);
+                }
                 pen.lineWidth = 0.5;
                 pen.beginPath();
-                pen.DrawArc(circle.center, circle.unitRadius, 0, 360);
+                pen.DrawArc(circle.center, circle.unitRadius);
+                pen.fillStyle = pen.strokeStyle = '#ffffff';
                 pen.fill();
+                pen.fillStyle = pen.strokeStyle = '#000000';
+                pen.stroke();
+                var days = ['Sat', 'Fri', 'Thu', 'Wed', 'Tue', 'Mon', 'Sun'];
+                for (var i = 0; i < 7; i++) {
+                    pen.fillText(days[i], circle.center + 1, circle.unitRadius * (i + 1.5));
+                    pen.DrawArc(circle.center, circle.unitRadius * (i + 2));
+                }
+                var x, y;
+                for (var i = 0; i < 24; i++) {
+                    x = utils.pointX(i - 6), y = utils.pointY(i - 6);
+                    if (i >= 0 && i < 6) {y -= circle.unitRadius / 2;x -= (circle.unitRadius / 1);}
+                    else if (i >= 6 && i < 12) {y += circle.unitRadius / 2;x -= (circle.unitRadius / 1);}
+                    else if (i >= 12 && i < 18) {y += (circle.unitRadius / 2);}
+                    if (i > 18) {y -= circle.unitRadius / 2;}
+                    pen.fillText((24 - i) + ":00", x, y);
+                }
 
+                MyPen = pen;
             };
         }
+        var MyPen;
     </script>
 </head>
 <body onload="BodyOnLoad()" >
     <div id="left">
 </div>
     <div id="right">
-        <canvas id="clock" width="400" height="400">
-        </canvas>
+        <div id="chart" style="width:600px; height:500px;" >
+        </div>
+        <!--<canvas id="clock" width="400" height="400">
+        </canvas>-->
     </div>
     <script type="text/javascript">
         var BodyOnLoad = function () {
-            var dat = [[0, 2, 9], [4, 6, 13], [3, 5, 12], [5, 7, 14], [7, 9, 16], [11, 13, 21], [1, 3, 10]]
-            var dc = new dataClock('clock');
+            var legendDef = {
+                none: { color: '#FF6600', text: 'None' }
+                , one: { color: '#FF00FF', text: '0 -1' }
+                , two: { color: '#CCCC66', text: '1 -2' }
+                , three: { color: '#CC4466', text: '2 -3' }
+            }
+            var chartParams = { id: 'chart', chartsize: 450, legendSize: '140px', legend: legendDef };
+            //var dat = [[0, 2, 9], [4, 6, 13], [3, 5, 12], [5, 7, 14], [7, 9, 16], [11, 13, 21], [1, 3, 10]]
+            // Format of imput [{SunObj},{Tues Obje}.... [satObj]]
+            // SunObj = { T1: v1, t2,:v2.....Tn:vn} Where n in Tn is less than 24,n in vn will be th count of legends
+
+            var dat = [
+                { 0: 'none', 4: 'three', 17: 'one'}, //Sun
+                {2: 'none', 12: 'three', 17: 'one' }, //Mon
+                {8: 'none', 7: 'three', 17: 'one' }, //Tue
+                {14: 'none', 3: 'three', 17: 'one' }, //Wed
+                {10: 'none', 1: 'three', 17: 'one' }, //Thu
+                {17: 'none', 9: 'three', 17: 'one' }, //Fri
+                {20: 'none', 1: 'three', 17: 'one'}//Sat
+            ];
+            var dc = new dataClock(chartParams);
             dc.plotData(dat);
         }
         
